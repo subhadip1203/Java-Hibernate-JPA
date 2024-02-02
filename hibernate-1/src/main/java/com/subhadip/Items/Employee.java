@@ -2,11 +2,12 @@ package com.subhadip.Items;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
-public class Person {
+public class Employee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -14,12 +15,8 @@ public class Person {
 
     private String name;
 
-    private int age;
-
-
-//    @OneToOne(mappedBy = "user")
-    @OneToMany(mappedBy="user")
-    private List<Address> address;
+    @ManyToMany()
+    private List<Project> projects = new ArrayList<Project>();
 
     public Long getId() {
         return id;
@@ -37,19 +34,11 @@ public class Person {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public List<Project> getProjects() {
+        return projects;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public List<Address> getAddress() {
-        return address;
-    }
-
-    public void addAddress(Address address) {
-        this.address.add(address);
+    public void addProjects(Project projects) {
+        this.projects.add(projects);
     }
 }
